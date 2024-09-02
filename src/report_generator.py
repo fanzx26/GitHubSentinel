@@ -57,6 +57,14 @@ class ReportGenerator:
         
         return report, report_file_path
 
+    def generate_daily_report_test_gradio(self, markdown_file_path):
+        report_file_path = os.path.splitext(markdown_file_path)[0] + "_report.md"
+        LOG.info(f"Temp: read report_file_path = {report_file_path}")  
+        with open(report_file_path, 'r') as report_file:
+            return report_file.read(), report_file_path
+
+        return "# DRY DRY RUN", report_file_path
+
 
     def generate_report_by_date_range(self, markdown_file_path, days):
         # 生成特定日期范围的报告，流程与日报生成类似

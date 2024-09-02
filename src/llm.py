@@ -4,16 +4,21 @@ from openai import OpenAI  # 导入OpenAI库用于访问GPT模型
 from logger import LOG  # 导入日志模块
 
 class LLM:
-    def __init__(self):
+    def __init__(self, model="gpt-3.5-turbo"):
+        # "gpt-4o-mini" "gpt-3.5-turbo"
+        self.model = model  
         # 创建一个OpenAI客户端实例
-        self.client = OpenAI()
+        self.client = OpenAI(
+                base_url="https://api.gptsapi.net/v1",
+                api_key=os.getenv("OPENAI_KEY")
+            )
         # 从TXT文件加载提示信息
-        with open("prompts/report_prompt.txt", "r", encoding='utf-8') as file:
+        with open("prompts/report_prompt_v1.txt", "r", encoding='utf-8') as file:
             self.system_prompt = file.read()
         # 配置日志文件，当文件大小达到1MB时自动轮转，日志级别为DEBUG
         LOG.add("logs/llm_logs.log", rotation="1 MB", level="DEBUG")
 
-    def generate_daily_report(self, markdown_content, dry_run=False):
+    def generate_daily_report(self, markdown_content, dry_run=True):
         # 使用从TXT文件加载的提示信息
         messages = [
             {"role": "system", "content": self.system_prompt},
@@ -35,7 +40,7 @@ class LLM:
         try:
             # 调用OpenAI GPT模型生成报告
             response = self.client.chat.completions.create(
-                model="gpt-4o-mini",  # 指定使用的模型版本
+                model=self.model,  # 指定使用的模型版本
                 messages=messages
             )
             LOG.debug("GPT response: {}", response)

@@ -23,3 +23,9 @@ class Config:
             self.freq_days = config.get('github_progress_frequency_days', 1)
             # 默认早上8点更新 (操作系统默认时区是 UTC +0，08点刚好对应北京时间凌晨12点)
             self.exec_time = config.get('github_progress_execution_time', "08:00") 
+
+            # 默认每天执行
+            self.hacker_freq_days = config.get('hacker_progress_frequency_days', 1)
+            self.hacker_freq_hours  = config.get('hacker_progress_frequency_hours', 6)
+            # 默认早上8点更新 (操作系统默认时区是 UTC +0，08点刚好对应北京时间凌晨12点)
+            self.hacker_exec_time = config.get('hacker_progress_execution_time', "08:00") 

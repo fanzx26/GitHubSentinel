@@ -1,4 +1,6 @@
 [
     "ollama/ollama",
-    "vllm-project/vllm"
+    "vllm-project/vllm",
+    "xorbitsai/inference",
+    "langgenius/dify"
 ]

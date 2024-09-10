@@ -1,14 +1,17 @@
 {
     "github_token": "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",
     "email":  {
-        "smtp_server": "smtp.exmail.qq.com",
-        "smtp_port": 465,
-        "from": "pjt@zaijidata.com",
+        "smtp_server": "smtp.163.com",
+        "smtp_port": 25,
+        "from": "fzx030426@163.com",
         "password": "",
-        "to": "test@zaijidata.com"
+        "to": "fzx030426@163.com"
     },
     "slack_webhook_url": "your_slack_webhook_url",
     "subscriptions_file": "subscriptions.json",
     "github_progress_frequency_days": 1,
-    "github_progress_execution_time":"08:00"
+    "github_progress_execution_time":"08:00",
+    "hacker_progress_frequency_days": 1,
+    "hacker_progress_frequency_hours": 6,
+    "hacker_progress_execution_time":"08:00"
 }

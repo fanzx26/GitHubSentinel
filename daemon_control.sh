@@ -8,16 +8,23 @@ DAEMON_NAME="DaemonProcess"
 # 定义日志文件的路径
 LOG_FILE="./logs/$DAEMON_NAME.log"
 # 定义守护进程的 PID 文件路径，用于存储进程号
-PID_FILE="./run/$DAEMON_NAME.pid"
+RUN_DIR="./run"
+PID_FILE="./$RUN_DIR/$DAEMON_NAME.pid"
+
+if [ ! -d $RUN_DIR ]; then
+    mkdir -p $RUN_DIR
+fi
 
 # 启动守护进程的函数
 start() {
-    echo "Starting $DAEMON_NAME..."
-    # 使用 nohup 命令在后台运行 Python 脚本，并将输出重定向到日志文件
-    nohup python3 $DAEMON_PATH > $LOG_FILE 2>&1 &
-    # 将守护进程的 PID 写入文件
-    echo $! > $PID_FILE
-    echo "$DAEMON_NAME started."
+    if [ -f "$PID_FILE" ]; then
+        echo "$DAEMON_NAME 服务已经在运行中！(PID: $(cat $PID_FILE))"
+    else
+        echo "启动服务..."
+        nohup python "$DAEMON_PATH" > $LOG_FILE 2>&1 &
+        echo $! > "$PID_FILE"
+        echo "$DAEMON_NAME 服务已启动，PID: $(cat $PID_FILE)"
+    fi
 }
 
 # 停止守护进程的函数

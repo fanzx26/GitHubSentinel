@@ -13,7 +13,7 @@ class GitHubClient:
     def fetch_updates(self, repo, since=None, until=None):
         # 获取指定仓库的更新，可以指定开始和结束日期
         updates = {
-            'commits': self.fetch_commits(repo, since, until),  # 获取提交记录
+            # 'commits': self.fetch_commits(repo, since, until),  # 获取提交记录
             'issues': self.fetch_issues(repo, since, until),  # 获取问题
             'pull_requests': self.fetch_pull_requests(repo, since, until)  # 获取拉取请求
         }

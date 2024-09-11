@@ -14,7 +14,8 @@
     "llm": {
         "model_type": "ollama",
         "openai_model_name": "gpt-4o-mini",
+        "openai_api_url": "https://api.gptsapi.net/v1",
         "ollama_model_name": "llama3",
-        "ollama_api_url": "http://localhost:11434/api/chat"
+        "ollama_api_url": "http://localhost:6006/api/chat"
     }
 }

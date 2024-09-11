@@ -6,11 +6,15 @@ DAEMON_PATH="./src/daemon_process.py"
 # 定义守护进程的名称
 DAEMON_NAME="DaemonProcess"
 # 定义日志文件的路径
-LOG_FILE="./logs/$DAEMON_NAME.log"
+LOG_DIR="./logs"
+LOG_FILE="./$LOG_DIR/$DAEMON_NAME.log"
 # 定义守护进程的 PID 文件路径，用于存储进程号
 RUN_DIR="./run"
 PID_FILE="./$RUN_DIR/$DAEMON_NAME.pid"
 
+if [ ! -d $LOG_DIR ]; then
+    mkdir -p $LOG_DIR
+fi
 if [ ! -d $RUN_DIR ]; then
     mkdir -p $RUN_DIR
 fi

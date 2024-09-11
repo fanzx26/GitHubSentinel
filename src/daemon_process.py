@@ -45,7 +45,7 @@ def main():
 
     config = Config()  # 创建配置实例
     notifier = Notifier(config.email)  # 创建通知器实例
-    llm = LLM()  # 创建语言模型实例
+    llm = LLM(config)  # 创建语言模型实例
     report_generator = ReportGenerator(llm)  # 创建报告生成器实例
 
 
@@ -60,7 +60,7 @@ def main():
 
 
     hacker_client = HackerNewsClient()
-    hacker_news_job(hacker_client, report_generator, notifier, config.hacker_freq_days)
+    hacker_news_job(hacker_client, report_generator, notifier)
     schedule.every(config.hacker_freq_hours).hours.at(":00").do(hacker_news_job, hacker_client, report_generator, notifier)
 
     try:

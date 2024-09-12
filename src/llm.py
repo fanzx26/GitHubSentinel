@@ -12,20 +12,20 @@ class LLM:
                 base_url=self.llm_config.openai_api_url,
                 api_key=os.getenv("OPENAI_KEY")
             )
-        if self.llm_config.llm_type == "openai":
-            # 从TXT文件加载提示信息
-            with open("prompts/github_daily_report_openai_prompt.txt", "r", encoding='utf-8') as file:
-                self.github_system_prompt = file.read()
-            # 从TXT文件加载提示信息
-            with open("prompts/hacker_news_report_openai_prompt.txt", "r", encoding='utf-8') as file:
-                self.hacker_system_prompt = file.read()
-        else:
-            # 从TXT文件加载提示信息
-            with open("prompts/github_daily_report_ollama_prompt.txt", "r", encoding='utf-8') as file:
-                self.github_system_prompt = file.read()
-            # 从TXT文件加载提示信息
-            with open("prompts/hacker_news_report_ollama_prompt.txt", "r", encoding='utf-8') as file:
-                self.hacker_system_prompt = file.read()
+        # if self.llm_config.llm_type == "openai":
+        #     # 从TXT文件加载提示信息
+        #     with open("prompts/github_daily_report_openai_prompt.txt", "r", encoding='utf-8') as file:
+        #         self.github_system_prompt = file.read()
+        #     # 从TXT文件加载提示信息
+        #     with open("prompts/hacker_news_report_openai_prompt.txt", "r", encoding='utf-8') as file:
+        #         self.hacker_system_prompt = file.read()
+        # else:
+        #     # 从TXT文件加载提示信息
+        #     with open("prompts/github_daily_report_ollama_prompt.txt", "r", encoding='utf-8') as file:
+        #         self.github_system_prompt = file.read()
+        #     # 从TXT文件加载提示信息
+        #     with open("prompts/hacker_news_report_ollama_prompt.txt", "r", encoding='utf-8') as file:
+        #         self.hacker_system_prompt = file.read()
 
     def generate_daily_report(self, markdown_content, dry_run=False):
         # 使用从TXT文件加载的提示信息

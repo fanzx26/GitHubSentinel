@@ -5,8 +5,12 @@ from datetime import date, timedelta
 from logger import LOG  # 导入日志模块，用于记录日志信息
 
 class ReportGenerator:
-    def __init__(self, llm):
+    def __init__(self, config, llm):
         self.llm = llm  # 初始化时接受一个LLM实例，用于后续生成报告
+        self.system_prompts = self.pre_load_prompts(config)
+
+    def pre_load_prompts(self, config):
+        print(f"config={config}")
 
     def generate_daily_report(self, markdown_file_path):
         # 读取Markdown文件并使用LLM生成日报

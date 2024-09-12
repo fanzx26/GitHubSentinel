@@ -25,6 +25,8 @@ class Config:
             self.ollama_model_name = self.llm_config.get("ollama_model_name", "llama3.1")
             self.ollama_api_url = self.llm_config.get("ollama_api_url", "http://localhost:6006/api/chat")
 
+            self.prompts_file = config.get('prompts', {})
+
             self.subscriptions_file = config.get('subscriptions_file')
             # 默认每天执行
             self.freq_days = config.get('github_progress_frequency_days', 1)

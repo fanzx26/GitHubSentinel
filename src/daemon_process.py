@@ -33,7 +33,7 @@ def github_job(subscription_manager, github_client, report_generator, notifier, 
 def hacker_news_job(hacker_client, report_generator, notifier):
     LOG.info("[开始执行定时任务:HackerNews]")
     markdown_file_path = hacker_client.export_hour_news()
-
+    print(f"*** markdown_file_path={markdown_file_path}")
     report, report_file_path = report_generator.generate_hacker_news_report(markdown_file_path)
     notifier.notify_for_hacknews(markdown_file_path.replace('_','-')[:-3],report)
 

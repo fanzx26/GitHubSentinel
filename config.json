@@ -24,6 +24,10 @@
             "ollama_llama": "hacker_news_report_ollama_llama_prompt.txt"
         }
     },
+    "report_types": [
+        "github",
+        "hacker_news"
+    ],
     "slack_webhook_url": "your_slack_webhook_url",
     "subscriptions_file": "subscriptions.json",
     "github_progress_frequency_days": 1,

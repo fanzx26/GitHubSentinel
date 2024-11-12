@@ -7,10 +7,17 @@ from logger import LOG  # 导入日志模块，用于记录日志信息
 class ReportGenerator:
     def __init__(self, config, llm):
         self.llm = llm  # 初始化时接受一个LLM实例，用于后续生成报告
+        self.config = config
         self.system_prompts = self.pre_load_prompts(config)
 
     def pre_load_prompts(self, config):
         print(f"config={config}")
+        for report_type in config.report_types:
+            prompt_file = f"prompts/{report_type}_{self.llm.llm_type}_prompt.txt"
+            if not os.path.exist(prompt_file):
+                LOG.error(f"prompt文件不存在：{prompt_file}")
+            with open(prompt_file, "r", encoding='utf-8') as file:
+                self.system_prompts[report_type] = file.read()
 
     def generate_daily_report(self, markdown_file_path):
         # 读取Markdown文件并使用LLM生成日报
@@ -33,8 +40,8 @@ class ReportGenerator:
         with open(markdown_file_path, 'r') as file:
             markdown_content = file.read()
 
-        # report = self.llm.generate_daily_report(markdown_content)
-        report = self.llm.generate_report(markdown_content)
+        system_prompt = self.system_prompts.get("github")
+        report = self.llm.generate_report(system_prompt, markdown_content)
 
         report_file_path = os.path.splitext(markdown_file_path)[0] + f"_report.md"
         with open(report_file_path, 'w+') as report_file:
@@ -49,7 +56,8 @@ class ReportGenerator:
         with open(markdown_file_path, 'r') as file:
             markdown_content = file.read()
 
-        report = self.llm.generate_report(markdown_content)
+        system_prompt = self.system_prompts.get("hacker_news")
+        report = self.llm.generate_report(system_prompt, markdown_content)
 
         report_file_path = os.path.splitext(markdown_file_path)[0] + f"_report.md"
         with open(report_file_path, 'w+') as report_file:

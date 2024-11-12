@@ -20,7 +20,7 @@ class Config:
 
             self.llm_config = config.get('llm', {})
             self.llm_type = self.llm_config.get("llm_type", "ollama")
-            self.openai_model_name = self.llm_config.get("openai_model_name", "ollama")
+            self.openai_model_name = self.llm_config.get("openai_model_name", "gpt-4o-mini")
             self.openai_api_url = self.llm_config.get("openai_api_url", "https://api.gptsapi.net/v1")
             self.ollama_model_name = self.llm_config.get("ollama_model_name", "llama3.1")
             self.ollama_api_url = self.llm_config.get("ollama_api_url", "http://localhost:6006/api/chat")
